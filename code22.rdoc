@@ -1,0 +1,5 @@
+= code22
+
+Generate this with
+    code22 rdoc
+After you have described your command line interface
