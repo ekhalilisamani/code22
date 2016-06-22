@@ -28,6 +28,7 @@ flag [:f,:flagname]
 
 desc 'Describe write here'
 arg_name 'Describe arguments to write here'
+#arg :name => :required
 command :write do |c|
   c.desc 'Describe a switch to write'
   c.switch :s
@@ -35,10 +36,31 @@ command :write do |c|
   c.desc 'Describe a flag to write'
   c.default_value 'default'
   c.flag :f
+
   c.action do |global_options,options,args|
 
+    class Language
+      def initialize(name,creator)
+        @name= name
+
+        @creator= creator
+      end
+      def description
+        puts " I'm #{@name} and i created by #{@creator}!"
+      end
+    end
+    ruby=Language.new(args[0],"Yuki") # new is a class method because call by calls
+    ruby.description # description is an instance method because call by object
+    paython=Language.new(args[1],"Gido")
+    java=Language.new(args[2],"Brendan")
+    paython.description
+    java.description
+
+
+
+
     # Your command logic here
-     
+
     # If you have any errors, just raise them
     # raise "that command made no sense"
 
@@ -50,6 +72,7 @@ desc 'Describe read here'
 arg_name 'Describe arguments to read here'
 command :read do |c|
   c.action do |global_options,options,args|
+
     puts "read command ran"
   end
 end
