@@ -1,16 +1,21 @@
 #!/usr/bin/env ruby
 require 'gli'
+require 'code22' #for require staitment we just use the name file without code22/app.rb
+#but for $ load we need whole or go code22.rb
 begin # XXX: Remove this begin/rescue before distributing your app
-require 'code22'
+
 rescue LoadError
   STDERR.puts "In development, you need to use `bundle exec bin/code22` to run your app"
   STDERR.puts "At install-time, RubyGems will make sure lib, etc. are in the load path"
   STDERR.puts "Feel free to remove this message from bin/code22 now"
   exit 64
 end
-extend GLI::App
-#include GLI::App
 
+Code22::App.run(ARGV)
+
+#include GLI::App
+=begin
+include Code22::App is not corret because app here is a class and you can not include
 program_desc 'Describe your application here'
 
 version Code22::VERSION
@@ -117,3 +122,4 @@ on_error do |exception|
 end
 
 exit run(ARGV)
+=end
